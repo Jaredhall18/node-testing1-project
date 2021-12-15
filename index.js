@@ -8,7 +8,7 @@
  */
 function trimProperties(obj) {
   const copy = Object.assign({}, obj)
-  for (const key in obj) {
+  for (const key in copy) {
     copy[key] = copy[key].trim();
   }
   return copy;
@@ -23,7 +23,10 @@ function trimProperties(obj) {
  * trimPropertiesMutation({ name: '  jane  ' }) // returns the object mutated in place { name: 'jane' }
  */
 function trimPropertiesMutation(obj) {
-  // ✨ implement
+  for (const key in obj) {
+    obj[key] = obj[key].trim();
+  }
+  return obj;
 }
 
 /**
