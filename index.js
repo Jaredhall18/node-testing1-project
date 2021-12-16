@@ -90,7 +90,8 @@ class Seasons {
    * [Exercise 5A] Seasons creates a seasons object
    */
   constructor() {
-    // ✨ initialize whatever properties are needed
+    this.seasons = ["spring", "summer", "fall", "winter"];
+    this.currentSeasonIndex = 0;
   }
 
   /**
@@ -106,7 +107,10 @@ class Seasons {
    * seasons.next() // returns "summer"
    */
   next() {
-    // ✨ implement
+    this.currentSeasonIndex === 3
+      ? (this.currentSeasonIndex = 0)
+      : this.currentSeasonIndex++;
+    return this.seasons[this.currentSeasonIndex];
   }
 }
 
@@ -118,9 +122,11 @@ class Car {
    * @param {number} mpg - miles the car can drive per gallon of gas
    */
   constructor(name, tankSize, mpg) {
-    this.odometer = 0 // car initilizes with zero miles
-    this.tank = tankSize // car initiazes full of gas
-    // ✨ initialize whatever other properties are needed
+    this.odometer = 0; // car initilizes with zero miles
+    this.tank = tankSize; // car initiazes full of gas
+    this.name = name;
+    this.tankSize = tankSize;
+    this.mpg = mpg;
   }
 
   /**
@@ -137,7 +143,15 @@ class Car {
    * focus.drive(200) // returns 600 (ran out of gas after 100 miles)
    */
   drive(distance) {
-    // ✨ implement
+    const mileage = this.tank * this.mpg;
+    if (mileage >= distance) {
+      this.odometer += distance;
+      this.tank -= distance / this.mpg;
+    } else {
+      this.odometer += mileage;
+      this.tank = 0;
+    }
+    return this.odometer;
   }
 
   /**
@@ -152,7 +166,13 @@ class Car {
    * focus.refuel(99) // returns 600 (tank only holds 20)
    */
   refuel(gallons) {
-    // ✨ implement
+    const freeSpace = this.tankSize - this.tank;
+    if (freeSpace >= gallons) {
+      this.tank += gallons;
+    } else {
+      this.tank = this.tankSize;
+    }
+    return this.tank * this.mpg;
   }
 }
 
@@ -170,7 +190,7 @@ class Car {
  * })
  */
 function isEvenNumberAsync(number) {
-  // ✨ implement
+  return number % 2 === 0;
 }
 
 module.exports = {
